@@ -1,0 +1,20 @@
+import datetime
+import csv
+import os
+
+def log_study_session(duration_hours, subject):
+    filename = 'study_log.csv'
+    file_exists = os.path.isfile(filename)
+
+    with open(filename, 'a', newline='') as f:
+        writer = csv.writer(f)
+        if not file_exists:
+            writer.writerow(['Date', 'Time', 'Subject', 'Duration_Hours'])
+
+        now = datetime.datetime.now()
+        writer.writerow([now.strftime('%Y-%m-%d'), now.strftime('%H:%M:%S'), subject, duration_hours])
+
+    print(f"Logged {duration_hours} hours for {subject} on {datetime.datetime.now().strftime('%Y-%m-%d')}.")
+
+# Example usage:
+# log_study_session(2, 'AI Software Engineering')
